@@ -18,5 +18,5 @@ echo "CMD python /home/myapp/design_app.py" >> tempdir/Dockerfile
 
 cd tempdir
 docker build -t designapp .
-docker run -t -d -p 8080:8080 --name designrunning designapp
+docker run -t -d -p 5050:5050 --name designrunning designapp
 docker ps -a 
