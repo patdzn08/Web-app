@@ -1,0 +1,92 @@
+{% extends "Maps/base.html" %}
+
+{%block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="inputlocation" class="form-label"><b>Original Location:</b></label>
+      <input type="text" class="form-control" name="inputlocation" aria-describedby="emailHelp">
+      <label for="inputDestination" class="form-label"><b> Destination: </b></label>
+      <input type="text" class="form-control" name="inputDestination">
+    </div>
+
+    <div class="custom-control custom-radio">
+      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+      <label class="custom-control-label" for="customRadio1">Kilometer/Liters</label>
+    </div>
+
+    <div class="custom-control custom-radio">
+      <input type="rsadio" id="customRadio2" name="customRadio" class="custom-control-input">
+      <label class="custom-control-label" for="customRadio2">Miles/Gallon</label>
+    </div>
+
+    <p></p>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-primary" onclick="resetEffort()">Reset</button>
+  
+  </form>
+
+<div class="left">
+  {% if InputOrig %}
+  <h4>Information: </h4>
+  <p><b>From:</b>{{InputOrig}}    <b>To: </b>{{InputDest}}</p>
+  <p><b>Driving Distance: </b>The location {{InputDest}} is {{KM}} away</p>
+  <p><b>Time Duration:</b> The Trip Duration is {{Trip_Duration}}</p>
+  <p><b>Fuel Consumption: </b> Your fuel consumption will be {{Fuel}} </p>
+  {%else%}
+  
+</div>
+
+  {% endif %}
+
+  
+  {% if directions %}
+  <h4>Directions:</h4>
+    {% for each in directions %}
+  
+      <p>{{each}}</p>
+ 
+    {% endfor %}
+ 
+
+  {% else %}
+
+    <p></p>
+  
+  {% endif %}
+
+<div class= "right">
+  
+    {% if InputOrig %}
+    <h4>Alternate Route Information:</h4>
+    <p><b>Driving Distance:</b> location {{InputDest}} is {{KM2}} away</p>
+    <p><b>Time Duration:</b> The Trip Duration is {{Trip_Duration2}}</p>
+    <p><b>Fuel Consumption:</b> Your fuel consumption will be {{Fuel2}} </p>
+    {%else%}
+    
+  
+  
+    {% endif %}
+  
+ 
+    {% if directions2 %}
+    <h4>Alternate Directions:</h4>
+      {% for opt in directions2 %}
+    
+        <p class="spacing">{{opt}}</p>
+   
+      {% endfor %}
+   
+  </div>
+    {% else %}
+  
+      <p></p>
+    
+    {% endif %}
+</div>
+        
+    
+{% endblock content %}
+  
